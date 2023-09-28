@@ -1,9 +1,8 @@
-/* eslint-disable import/no-extraneous-dependencies */
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 
-import { WrappedApp, App } from './App';
+import { App, WrappedApp } from './App';
 
 describe('App', (): void => {
   it('Renders hello world', (): void => {
