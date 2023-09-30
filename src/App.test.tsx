@@ -5,13 +5,10 @@ import { MemoryRouter } from 'react-router-dom';
 import { App, WrappedApp } from './App';
 
 describe('App', (): void => {
-  it('Renders hello world', (): void => {
+  it('Renders main page', (): void => {
     render(<WrappedApp />);
-    expect(
-      screen.getByRole('heading', {
-        level: 1,
-      })
-    ).toHaveTextContent('Home page');
+    expect(screen.getByRole('banner')).toBeInTheDocument();
+    expect(screen.getByRole('main')).toBeInTheDocument();
   });
 
   it('Renders NotFound page if invalid path', (): void => {
@@ -20,10 +17,10 @@ describe('App', (): void => {
         <App />
       </MemoryRouter>
     );
+    expect(screen.getByText('404')).toBeInTheDocument();
     expect(
-      screen.getByRole('heading', {
-        level: 1,
-      })
-    ).toHaveTextContent('404');
+      screen.getByText('The Page you are looking is not found')
+    ).toBeInTheDocument();
+    expect(screen.getByRole('link')).toBeInTheDocument();
   });
 });
