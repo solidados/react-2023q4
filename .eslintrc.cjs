@@ -3,7 +3,7 @@ module.exports = {
     browser: true,
     es2021: true,
     jest: true,
-    node: true
+    node: true,
   },
   extends: [
     'airbnb',
@@ -18,7 +18,7 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
-      jsx: true
+      jsx: true,
     },
     ecmaVersion: 'latest',
     sourceType: 'module',
@@ -46,7 +46,7 @@ module.exports = {
   settings: {
     react: {
       pragma: 'React',
-      version: 'detect'
-    }
-  }
+      version: 'detect',
+    },
+  },
 };
