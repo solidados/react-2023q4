@@ -1,13 +1,15 @@
-const url = 'https://swapi.dev/api/';
+class ApiRequest {
+  static defaultSearch: string = localStorage.getItem('searchResult') || 'star';
 
-async function apiResponse() {
-  try {
-    const response = await fetch(url);
-    const result = await response.json();
-    console.log(result);
-  } catch (error) {
-    console.error(error);
-  }
+  static URL: string = 'https://www.omdbapi.com/';
+
+  static API_KEY: string = '90edd0f9';
+
+  static fetchData = () => {
+    return fetch(
+      `${this.URL}?apikey=${this.API_KEY}&s=${this.defaultSearch}`
+    ).then((response) => response.json());
+  };
 }
 
-export default apiResponse;
+export default ApiRequest;
