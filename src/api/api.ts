@@ -1,14 +1,29 @@
+interface IData {
+  Poster: string;
+  Title: string;
+  Year: string;
+  Type: string;
+  imdbID: string;
+}
+
+interface IApiResponse {
+  Search: IData[];
+}
+
 class ApiRequest {
-  static defaultSearch: string = localStorage.getItem('searchResult') || 'star';
+  private static defaultSearch: string =
+    localStorage.getItem('searchResult') || 'star';
 
-  static URL: string = 'https://www.omdbapi.com/';
+  private static URL: string = 'https://www.omdbapi.com/';
 
-  static API_KEY: string = '90edd0f9';
+  private static API_KEY: string = '90edd0f9';
 
-  static fetchData = () => {
-    return fetch(
+  static fetchData = async (): Promise<IApiResponse> => {
+    const response = await fetch(
       `${this.URL}?apikey=${this.API_KEY}&s=${this.defaultSearch}`
-    ).then((response) => response.json());
+    );
+    const data: IApiResponse = response.json();
+    return data;
   };
 }
 

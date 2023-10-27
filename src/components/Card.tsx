@@ -9,10 +9,13 @@ class Card extends Component {
     };
   }
 
-  public componentDidMount() {
-    ApiRequest.fetchData()
-      .then((data) => this.setState({ data }))
-      .catch((err) => console.error('Error:', err));
+  public async componentDidMount(): Promise<void> {
+    try {
+      const data = await ApiRequest.fetchData();
+      this.setState({ data });
+    } catch (err) {
+      console.error('Error:', err);
+    }
   }
 
   render() {
@@ -29,7 +32,7 @@ class Card extends Component {
           </div>
         </div>
       ));
-    return <div className="card">{content}</div>;
+    return <div className="cards">{content}</div>;
   }
 }
 
