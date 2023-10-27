@@ -1,8 +1,13 @@
 import { Component } from 'react';
-import ApiRequest from '../api/api';
+import ApiRequest, { IApiResponse } from '../api/api';
+import './Card.css';
 
-class Card extends Component {
-  constructor(props) {
+interface IState {
+  data: IApiResponse | null;
+}
+
+class Card extends Component<NonNullable<unknown>, IState> {
+  constructor(props: NonNullable<unknown>) {
     super(props);
     this.state = {
       data: null,
@@ -25,10 +30,16 @@ class Card extends Component {
       data.Search.map((item) => (
         <div className="card-item" key={item.imdbID}>
           <img src={item.Poster} alt="poster" className="card-img" />
-          <h2 className="card-title">{item.Title}</h2>
           <div className="card-description">
-            <p>Year: {item.Year}</p>
-            <p>Type: {item.Type}</p>
+            <h3 className="card-title">
+              <span>Title:</span> {item.Title}
+            </h3>
+            <p>
+              <span>Year:</span> {item.Year}
+            </p>
+            <p>
+              <span>Type:</span> {item.Type}
+            </p>
           </div>
         </div>
       ));
