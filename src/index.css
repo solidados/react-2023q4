@@ -151,8 +151,8 @@ main {
 main div {
   width: 250px;
   height: auto;
+  padding: 20px 0;
   margin: 20px 15px;
-  background: rgb(128, 128, 128);
 }
 
 img {
