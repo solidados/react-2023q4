@@ -1,4 +1,4 @@
-interface IData {
+export interface IData {
   Poster: string;
   Title: string;
   Year: string;
@@ -6,11 +6,11 @@ interface IData {
   imdbID: string;
 }
 
-interface IApiResponse {
+export interface IApiResponse {
   Search: IData[];
 }
 
-class ApiRequest {
+export class ApiRequest {
   private static defaultSearch: string =
     localStorage.getItem('searchResult') || 'star';
 
@@ -22,9 +22,6 @@ class ApiRequest {
     const response = await fetch(
       `${this.URL}?apikey=${this.API_KEY}&s=${this.defaultSearch}`
     );
-    const data: IApiResponse = response.json();
-    return data;
+    return response.json();
   };
 }
-
-export default ApiRequest;

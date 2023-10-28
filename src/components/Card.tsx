@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import ApiRequest, { IApiResponse } from '../api/api';
+import { ApiRequest, IApiResponse } from '../api/api';
 import './Card.css';
 
 interface IState {
@@ -18,8 +18,8 @@ class Card extends Component<NonNullable<unknown>, IState> {
     try {
       const data = await ApiRequest.fetchData();
       this.setState({ data });
-    } catch (err) {
-      console.error('Error:', err);
+    } catch (error) {
+      console.error('Error:', error);
     }
   }
 
