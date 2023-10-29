@@ -174,3 +174,10 @@ h2 {
   text-align: center;
   color: #fff;
 }
+
+.error-boundary {
+  padding: 50px 0;
+  text-align: center;
+  font-size: 4rem;
+  color: darkred;
+}

@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { ApiRequest, IApiResponse } from '../api/api';
+import { ApiRequest, IApiResponse } from '../helpers/api/api';
 import './Card.css';
 import Card from './Card';
 

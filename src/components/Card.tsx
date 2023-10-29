@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { IData } from '../api/api';
+import { IData } from '../helpers/api/api';
 
 class Card extends Component<{ item: IData }> {
   render() {
