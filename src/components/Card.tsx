@@ -1,4 +1,6 @@
 import { Component } from 'react';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { ApiRequest, IApiResponse } from '../api/api';
 import './Card.css';
 
@@ -15,13 +17,28 @@ class Card extends Component<NonNullable<unknown>, IState> {
   }
 
   public async componentDidMount(): Promise<void> {
+    await this.searchMovie();
+  }
+
+  searchMovie = async () => {
     try {
       const data = await ApiRequest.fetchData();
       this.setState({ data });
     } catch (error) {
-      console.error('Error:', error);
+      if (error instanceof Error) {
+        toast.error(`Error: ${error.message}`, {
+          position: 'top-right',
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'dark',
+        });
+      }
     }
-  }
+  };
 
   render() {
     const { data } = this.state;

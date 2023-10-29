@@ -1,4 +1,5 @@
 import { HashRouter, Route, Routes } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
 
@@ -15,6 +16,7 @@ export function WrappedApp() {
   return (
     <HashRouter>
       <App />
+      <ToastContainer />
     </HashRouter>
   );
 }
