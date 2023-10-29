@@ -40,7 +40,7 @@ module.exports = {
     '@typescript-eslint/no-var-requires': 'off',
     'react/jsx-uses-react': 'off',
     'react/react-in-jsx-scope': 'off',
-    'import/no-extraneous-dependencies': 'off',
+    /*'import/no-extraneous-dependencies': 'off',*/
     /* Temp rule off for Class approach (before migration to Functional approach) */
     'react/prefer-stateless-function': 'off',
   },

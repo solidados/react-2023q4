@@ -11,16 +11,19 @@ export interface IApiResponse {
 }
 
 export class ApiRequest {
-  private static defaultSearch: string =
-    localStorage.getItem('searchResult') || 'star';
-
   private static URL: string = 'https://www.omdbapi.com/?apikey=';
 
   private static API_KEY: string = '90edd0f9';
 
-  static fetchData = async (): Promise<IApiResponse> => {
+  private static get defaultSearch() {
+    return localStorage.getItem('searchResult') || 'star';
+  }
+
+  static fetchData = async (
+    title: string = this.defaultSearch
+  ): Promise<IApiResponse> => {
     const response = await fetch(
-      `${this.URL}${this.API_KEY}&s=${this.defaultSearch}&page=1`
+      `${this.URL}${this.API_KEY}&s=${title}&page=1`
     );
     return response.json();
   };
