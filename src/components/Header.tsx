@@ -1,6 +1,5 @@
 import { Component } from 'react';
 import SearchBar from './SearchBar';
-import SearchButton from './SearchButton';
 
 class Header extends Component {
   render() {
@@ -9,7 +8,6 @@ class Header extends Component {
         <div className="header-container">
           <h1>Movies</h1>
           <SearchBar />
-          <SearchButton />
         </div>
       </header>
     );

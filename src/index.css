@@ -117,6 +117,10 @@ h1 {
   color: #ffffff;
 }
 
+.search-bar {
+  display: flex;
+}
+
 #search {
   width: 25rem;
   height: 2.1rem;
@@ -135,10 +139,11 @@ input[placeholder] {
 }
 
 .search-btn {
-  height: 2.1rem;
-  background-color: #ffffff;
   width: 5rem;
-
+  height: 2.1rem;
+  border-top-right-radius: 0.6rem;
+  border-bottom-right-radius: 0.6rem;
+  background-color: #ffffff;
 }
 
 main {

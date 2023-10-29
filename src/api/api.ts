@@ -14,13 +14,13 @@ export class ApiRequest {
   private static defaultSearch: string =
     localStorage.getItem('searchResult') || 'star';
 
-  private static URL: string = 'https://www.omdbapi.com/';
+  private static URL: string = 'https://www.omdbapi.com/?apikey=';
 
   private static API_KEY: string = '90edd0f9';
 
   static fetchData = async (): Promise<IApiResponse> => {
     const response = await fetch(
-      `${this.URL}?apikey=${this.API_KEY}&s=${this.defaultSearch}`
+      `${this.URL}${this.API_KEY}&s=${this.defaultSearch}&page=1`
     );
     return response.json();
   };
