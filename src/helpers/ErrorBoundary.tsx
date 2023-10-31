@@ -1,9 +1,9 @@
 import { Component, ErrorInfo } from 'react';
 import { toast } from 'react-toastify';
-import { IErrorState, Props } from './types/types';
+import { IErrorProps, IErrorState } from './types/types';
 
-class ErrorBoundary extends Component<Props, IErrorState> {
-  constructor(props: Props) {
+class ErrorBoundary extends Component<IErrorProps, IErrorState> {
+  constructor(props: IErrorProps) {
     super(props);
     this.state = { hasError: false };
   }

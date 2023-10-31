@@ -12,7 +12,7 @@ export interface IData {
   imdbID: string;
 }
 
-export interface Props {
+export interface IErrorProps {
   children?: ReactNode;
   fallback: ReactElement;
 }

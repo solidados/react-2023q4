@@ -5,7 +5,7 @@ class SearchBar extends Component<Record<string, never>, ISearchState> {
   constructor(props: Record<string, never>) {
     super(props);
     this.state = {
-      searchInput: '',
+      searchInput: localStorage.getItem('searchResult') || '',
     };
   }
 
@@ -19,6 +19,7 @@ class SearchBar extends Component<Record<string, never>, ISearchState> {
   };
 
   render() {
+    const { searchInput } = this.state;
     return (
       <div className="search-bar">
         <input
@@ -27,6 +28,7 @@ class SearchBar extends Component<Record<string, never>, ISearchState> {
           placeholder="Search.."
           className="search"
           onChange={this.handleInputChange}
+          value={searchInput}
         />
         <button
           type="button"
