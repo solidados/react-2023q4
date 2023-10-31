@@ -1,10 +1,7 @@
 import { ChangeEvent, Component } from 'react';
+import { ISearchState } from '../helpers/types/types';
 
-interface State {
-  searchInput: string;
-}
-
-class SearchBar extends Component<Record<string, never>, State> {
+class SearchBar extends Component<Record<string, never>, ISearchState> {
   constructor(props: Record<string, never>) {
     super(props);
     this.state = {

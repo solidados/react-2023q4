@@ -15,22 +15,8 @@
     "prepare": "husky install"
   },
   "lint-staged": {
-    "src/**/*.ts": [
-      "prettier --write",
-      "eslint --color"
-    ],
-    "src/**/*.tsx": [
-      "prettier --write",
-      "eslint --color"
-    ],
-    "src/**/*.html": [
-      "prettier --write",
-      "eslint --color"
-    ],
-    "src/**/*.css": [
-      "prettier --write",
-      "eslint --color"
-    ]
+    "src/**/*.{ts,tsx,html,css}": "prettier --write",
+    "src/**/*.{ts,tsx}": "eslint --color"
   },
   "dependencies": {
     "axios": "^1.5.1",

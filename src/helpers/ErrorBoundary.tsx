@@ -1,17 +1,8 @@
-import { Component, ErrorInfo, ReactElement, ReactNode } from 'react';
+import { Component, ErrorInfo } from 'react';
 import { toast } from 'react-toastify';
+import { IErrorState, Props } from './types/types';
 
-interface Props {
-  // eslint-disable-next-line react/require-default-props
-  children?: ReactNode;
-  fallback: ReactElement;
-}
-
-interface State {
-  hasError: boolean;
-}
-
-class ErrorBoundary extends Component<Props, State> {
+class ErrorBoundary extends Component<Props, IErrorState> {
   constructor(props: Props) {
     super(props);
     this.state = { hasError: false };

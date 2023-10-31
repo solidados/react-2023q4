@@ -1,16 +1,6 @@
-export interface IData {
-  Poster: string;
-  Title: string;
-  Year: string;
-  Type: string;
-  imdbID: string;
-}
+import { IApiResponse } from '../types/types';
 
-export interface IApiResponse {
-  Search: IData[];
-}
-
-export class ApiRequest {
+class ApiRequest {
   private static URL: string = 'https://www.omdbapi.com/?apikey=';
 
   private static API_KEY: string = '90edd0f9';
@@ -28,3 +18,5 @@ export class ApiRequest {
     return response.json();
   };
 }
+
+export default ApiRequest;

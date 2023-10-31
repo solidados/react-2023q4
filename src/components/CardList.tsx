@@ -1,14 +1,10 @@
 import { Component } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { ApiRequest, IApiResponse } from '../helpers/api/api';
+import ApiRequest from '../helpers/api/api';
 import './Card.css';
 import Card from './Card';
-
-interface IState {
-  data: IApiResponse | null;
-  searchTerm: string | null;
-}
+import { IState } from '../helpers/types/types';
 
 class CardList extends Component<NonNullable<unknown>, IState> {
   constructor(props: NonNullable<unknown>) {
