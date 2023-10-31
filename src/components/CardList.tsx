@@ -7,6 +7,7 @@ import Card from './Card';
 
 interface IState {
   data: IApiResponse | null;
+  searchTerm: string | null;
 }
 
 class CardList extends Component<NonNullable<unknown>, IState> {
@@ -14,10 +15,12 @@ class CardList extends Component<NonNullable<unknown>, IState> {
     super(props);
     this.state = {
       data: null,
+      searchTerm: '',
     };
   }
 
   public async componentDidMount(): Promise<void> {
+    this.setState({ searchTerm: localStorage.getItem('searchResult') });
     await this.searchMovie();
   }
 
@@ -25,8 +28,8 @@ class CardList extends Component<NonNullable<unknown>, IState> {
     _prevProps: Readonly<NonNullable<unknown>>,
     prevState: Readonly<IState>
   ) {
-    const { data } = this.state;
-    if (prevState.data !== data) {
+    const { searchTerm } = this.state;
+    if (prevState.searchTerm !== searchTerm) {
       await this.searchMovie();
     }
   }

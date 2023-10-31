@@ -102,7 +102,7 @@ header {
   display: flex;
   height: 4rem;
   max-width: 100%;
-  background: #08428CD1;
+  background: #08428cd1;
 }
 
 .header-container {
@@ -169,7 +169,7 @@ img {
 h2 {
   font-size: 1rem;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
-  'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   font-weight: bold;
   text-align: center;
   color: #fff;
@@ -190,5 +190,5 @@ h2 {
   padding: 5px 7px;
   border-radius: 50%;
   background-color: rgb(204, 224, 255);
-  color: #08428CD1;
+  color: #08428cd1;
 }
