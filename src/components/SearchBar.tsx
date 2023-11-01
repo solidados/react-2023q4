@@ -1,11 +1,12 @@
 import { ChangeEvent, Component } from 'react';
 import { toast } from 'react-toastify';
 import ApiRequest from '../helpers/api/api';
-import { IData } from '../helpers/types/types';
+import { IApiResponse, IData } from '../helpers/types/types';
 
 export interface ISearchState {
   searchInput: string;
   data: IData[];
+  isLoading: boolean;
 }
 
 class SearchBar extends Component<
@@ -18,12 +19,15 @@ class SearchBar extends Component<
       searchInput: localStorage.getItem('searchResult') || '',
       // eslint-disable-next-line react/no-unused-state
       data: [],
+      isLoading: false,
     };
   }
 
   public async componentDidMount() {
     const { searchInput } = this.state;
+    this.setState({ isLoading: true });
     await this.searchMovie(searchInput);
+    this.setState({ isLoading: false });
   }
 
   handleInputChange = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -37,8 +41,14 @@ class SearchBar extends Component<
   };
 
   searchMovie = async (title: string) => {
+    this.setState({ isLoading: true });
     try {
-      const response = await ApiRequest.fetchData(title);
+      const response = await new Promise<IApiResponse>((resolve) => {
+        setTimeout(async () => {
+          const data = await ApiRequest.fetchData(title);
+          resolve(data);
+        }, 2000);
+      });
       const { onDataChange } = this.props;
       // eslint-disable-next-line react/no-unused-state
       this.setState({ data: response.Search });
@@ -56,11 +66,13 @@ class SearchBar extends Component<
           theme: 'dark',
         });
       }
+    } finally {
+      this.setState({ isLoading: false }); // добавьте это
     }
   };
 
   render() {
-    const { searchInput } = this.state;
+    const { searchInput, isLoading } = this.state;
     return (
       <div className="search-bar">
         <input
@@ -78,6 +90,7 @@ class SearchBar extends Component<
         >
           Search
         </button>
+        {isLoading && <div>Loading...</div>}
       </div>
     );
   }
