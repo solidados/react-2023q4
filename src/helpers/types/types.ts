@@ -1,29 +1,22 @@
 import { ReactElement, ReactNode } from 'react';
 
-export interface IApiResponse {
+export type IApiResponse = {
   Search: IData[];
-}
+  totalResults: number;
+  Response: boolean;
+};
 
-export interface IData {
+export type IData = {
   Poster: string;
   Title: string;
   Year: string;
   Type: string;
   imdbID: string;
-}
+};
 
 export interface IErrorProps {
   children?: ReactNode;
   fallback: ReactElement;
-}
-
-export interface IState {
-  data: IApiResponse | null;
-  searchTerm: string | null;
-}
-
-export interface ISearchState {
-  searchInput: string;
 }
 
 export interface IErrorState {
