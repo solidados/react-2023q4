@@ -1,5 +1,6 @@
 import { ChangeEvent, Component } from 'react';
 import { toast } from 'react-toastify';
+import { MagnifyingGlass } from 'react-loader-spinner';
 import ApiRequest from '../helpers/api/api';
 import { IApiResponse, IData } from '../helpers/types/types';
 
@@ -90,7 +91,22 @@ class SearchBar extends Component<
         >
           Search
         </button>
-        {isLoading && <div>Loading...</div>}
+        {isLoading && (
+          <div className="loader-wrapper">
+            <div className="loader">
+              <MagnifyingGlass
+                visible
+                height="100"
+                width="100"
+                ariaLabel="MagnifyingGlass-loading"
+                wrapperStyle={{}}
+                wrapperClass="MagnifyingGlass-wrapper"
+                glassColor="#CCE0FFFF"
+                color="#08428CD1"
+              />
+            </div>
+          </div>
+        )}
       </div>
     );
   }
