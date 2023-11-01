@@ -1,5 +1,4 @@
-import { Component, ErrorInfo } from 'react';
-import { toast } from 'react-toastify';
+import { Component } from 'react';
 import { IErrorProps, IErrorState } from './types/types';
 
 class ErrorBoundary extends Component<IErrorProps, IErrorState> {
@@ -12,25 +11,35 @@ class ErrorBoundary extends Component<IErrorProps, IErrorState> {
     return { hasError: true };
   }
 
-  componentDidCatch(error: Error, info: ErrorInfo): void {
-    toast.error(`Error: ${error.message}, ${info.componentStack}`, {
-      position: 'top-right',
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: 'dark',
-    });
-  }
-
   render() {
-    const { fallback, children } = this.props;
+    const { children } = this.props;
     const { hasError } = this.state;
 
     if (hasError) {
-      return fallback;
+      return (
+        <div className="error-boundary">
+          <img
+            src="https://t4.ftcdn.net/jpg/05/24/04/51/360_F_524045110_UXnCx4GEDapddDi5tdlY96s4g0MxHRvt.jpg"
+            alt="Oops!"
+          />
+          <h3
+            style={{
+              marginBottom: '20px',
+            }}
+          >
+            Something went wrong...
+          </h3>
+          <button
+            type="button"
+            onClick={(): void => {
+              this.setState({ hasError: false });
+            }}
+            className="home-btn"
+          >
+            Return Home
+          </button>
+        </div>
+      );
     }
 
     return children;

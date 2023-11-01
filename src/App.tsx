@@ -1,4 +1,4 @@
-import { HashRouter, Link, Route, Routes } from 'react-router-dom';
+import { HashRouter, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
@@ -16,14 +16,7 @@ export function App() {
 export function WrappedApp() {
   return (
     <HashRouter>
-      <ErrorBoundary
-        fallback={
-          <div className="error-boundary">
-            <p>Something went wrong</p>
-            <Link to="/">return to Home Page</Link>
-          </div>
-        }
-      >
+      <ErrorBoundary>
         <App />
         <ToastContainer />
       </ErrorBoundary>

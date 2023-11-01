@@ -16,7 +16,7 @@ export type IData = {
 
 export interface IErrorProps {
   children?: ReactNode;
-  fallback: ReactElement;
+  fallback?: ReactElement;
 }
 
 export interface IErrorState {
