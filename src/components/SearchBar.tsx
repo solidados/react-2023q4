@@ -17,7 +17,7 @@ class SearchBar extends Component<
   constructor(props: { onDataChange: (data: IData[]) => void }) {
     super(props);
     this.state = {
-      searchInput: localStorage.getItem('searchResult') || '',
+      searchInput: localStorage.getItem('searchResult') || 'star',
       // eslint-disable-next-line react/no-unused-state
       data: [],
       isLoading: false,
