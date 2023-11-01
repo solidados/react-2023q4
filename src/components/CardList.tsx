@@ -12,7 +12,7 @@ class CardList extends Component<{
     const { data } = this.props;
 
     if (!data || data.length === 0) {
-      return <p>Loading data...</p>;
+      return <p>Oops! Nothing is found...</p>;
     }
     const content = data.map((item) => <Card item={item} key={item.imdbID} />);
 
