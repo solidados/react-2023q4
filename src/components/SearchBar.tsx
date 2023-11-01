@@ -92,25 +92,24 @@ class SearchBar extends Component<
           Search
         </button>
         {isLoading && (
-          <Oval
-            wrapperClass=""
-            visible
-            ariaLabel="oval-loading"
-            wrapperStyle={{
-              position: 'absolute',
-              top: '30%',
-              left: '50%',
-              width: '100%',
-              height: '100vh',
-              backgroundColor: 'rgba(255,255,255,0.6)',
-            }}
-            height={60}
-            width={60}
-            color="#08428CD1"
-            secondaryColor="#CCE0FFFF"
-            strokeWidth={2}
-            strokeWidthSecondary={2}
-          />
+          <div className="loader-wrapper">
+            <Oval
+              wrapperClass=""
+              visible
+              ariaLabel="oval-loading"
+              wrapperStyle={{
+                position: 'relative',
+                top: '30%',
+                left: '50%',
+              }}
+              height={60}
+              width={60}
+              color="#08428CD1"
+              secondaryColor="#CCE0FFFF"
+              strokeWidth={2}
+              strokeWidthSecondary={2}
+            />
+          </div>
         )}
       </div>
     );
