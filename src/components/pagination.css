@@ -18,16 +18,27 @@
   justify-content: center;
   flex-wrap: wrap;
   align-items: center;
+  gap: 10px;
 }
 
 .pagination button {
   margin: 0 5px;
-  padding: 7px 10px;
+  padding: 7px 20px;
+  border: none;
+  border-radius: 10px;
   background: #08428cd1;
   color: #fff;
 }
 
+.pagination button:disabled {
+  background-color: rgb(204, 224, 255);
+  color: #08428cd1;
+}
+
 .pagination input {
-  width: 40px;
+  width: 70px;
+  padding: 7px 8px;
+  border-radius: 10px;
+  border: 1px solid #08428cd1;
   text-align: center;
 }

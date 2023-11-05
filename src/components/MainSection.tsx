@@ -52,7 +52,7 @@ function MainSection({ searchInput }: IMainSectionProps) {
           totalPages={totalPages}
           onPageChange={handlePageChange}
         />
-        <CardList searchInput={searchInput} />
+        <CardList searchInput={searchInput} pageNumber={pageNumber} />
       </div>
     </main>
   );

@@ -20,7 +20,7 @@ function Pagination({
     <div className="pagination">
       <div className="pagination-container">
         <p>
-          Total pages: <span>{totalPages}</span>
+          Found on <span>{totalPages}</span> pages
         </p>
         <div className="pagination-bar">
           <button
