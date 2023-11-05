@@ -3,16 +3,17 @@ import { Oval } from 'react-loader-spinner';
 import { toast } from 'react-toastify';
 import Card from './Card';
 import 'react-toastify/dist/ReactToastify.css';
-import './Card.css';
+import './card.css';
 import fetchData from '../helpers/api/api';
 import { IApiResponse, IData } from '../helpers/types/types';
 import NotFound from '../pages/NotFound';
 
 interface ICardListProps {
   searchInput: string;
+  pageNumber: number;
 }
 
-function CardList({ searchInput }: ICardListProps) {
+function CardList({ searchInput, pageNumber }: ICardListProps) {
   const [data, setData] = useState<IData[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
@@ -24,12 +25,14 @@ function CardList({ searchInput }: ICardListProps) {
         const response: IApiResponse = await new Promise<IApiResponse>(
           (resolve): void => {
             setTimeout(async (): Promise<void> => {
-              const responseData: IApiResponse = await fetchData(searchInput);
+              const responseData: IApiResponse = await fetchData(
+                searchInput,
+                pageNumber
+              );
               resolve(responseData);
             }, 2000);
           }
         );
-        // const response: IApiResponse = await fetchData(searchInput);
         setData(response.Search);
       } catch (error) {
         setHasError(true);
@@ -38,7 +41,7 @@ function CardList({ searchInput }: ICardListProps) {
       }
     };
     searchMovie().catch((error) => toast(`Error: ${error.message}`));
-  }, [searchInput]);
+  }, [searchInput, pageNumber]);
 
   if (!data || data.length === 0) {
     return <p>Oops! Nothing is found...</p>;

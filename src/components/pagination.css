@@ -1,0 +1,33 @@
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-bottom: 20px;
+  margin: 0 auto;
+}
+
+.pagination-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.pagination-bar {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.pagination button {
+  margin: 0 5px;
+  padding: 7px 10px;
+  background: #08428cd1;
+  color: #fff;
+}
+
+.pagination input {
+  width: 40px;
+  text-align: center;
+}
