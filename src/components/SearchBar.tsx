@@ -9,7 +9,9 @@ function SearchBar({ onDataChange }: ISearchProps) {
 
   useEffect(() => {
     const lastSearchResult = localStorage.getItem('searchResult');
-    setSearchInput(lastSearchResult || '');
+    if (lastSearchResult) {
+      setSearchInput(lastSearchResult);
+    }
   }, []);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>): void => {

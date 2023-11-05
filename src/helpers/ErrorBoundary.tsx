@@ -33,6 +33,8 @@ class ErrorBoundary extends Component<IErrorProps, IErrorState> {
             type="button"
             onClick={(): void => {
               this.setState({ hasError: false });
+              // window.location.href = '/';
+              window.location.reload();
             }}
             className="home-btn"
           >

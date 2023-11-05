@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import './Card.css';
 import fetchData from '../helpers/api/api';
 import { IApiResponse, IData } from '../helpers/types/types';
+import NotFound from '../pages/NotFound';
 
 interface ICardListProps {
   searchInput: string;
@@ -13,7 +14,8 @@ interface ICardListProps {
 
 function CardList({ searchInput }: ICardListProps) {
   const [data, setData] = useState<IData[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [hasError, setHasError] = useState(false);
 
   useEffect((): void => {
     const searchMovie = async (): Promise<void> => {
@@ -30,18 +32,7 @@ function CardList({ searchInput }: ICardListProps) {
         // const response: IApiResponse = await fetchData(searchInput);
         setData(response.Search);
       } catch (error) {
-        if (error instanceof Error) {
-          toast(`Error: ${error.message}`, {
-            position: 'top-right',
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: 'dark',
-          });
-        }
+        setHasError(true);
       } finally {
         setIsLoading(false);
       }
@@ -52,6 +43,8 @@ function CardList({ searchInput }: ICardListProps) {
   if (!data || data.length === 0) {
     return <p>Oops! Nothing is found...</p>;
   }
+
+  if (hasError) return <NotFound />;
 
   const content = data.map((item: IData) => (
     <Card item={item} key={item.imdbID} />
