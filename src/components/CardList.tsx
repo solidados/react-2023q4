@@ -1,53 +1,47 @@
 import { useEffect, useState } from 'react';
-import { Oval } from 'react-loader-spinner';
-import { toast } from 'react-toastify';
+import { useLocation } from 'react-router-dom';
 import Card from './Card';
-import 'react-toastify/dist/ReactToastify.css';
-import './card.css';
+
 import fetchData from '../helpers/api/api';
-import { IApiResponse, IData } from '../helpers/types/types';
-import NotFound from '../pages/NotFound';
+import { IData } from '../helpers/types/types';
 
-interface ICardListProps {
-  searchInput: string;
-  pageNumber: number;
-}
+import './card.css';
+import Loader from './Loader';
 
-function CardList({ searchInput, pageNumber }: ICardListProps) {
+function CardList() {
   const [data, setData] = useState<IData[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [hasError, setHasError] = useState(false);
+
+  const location = useLocation();
+
+  const getData = async (value?: string | undefined) => {
+    setIsLoading(true);
+    try {
+      const responseData = await fetchData(value);
+      setData(responseData.Search);
+    } catch (error) {
+      throw new Error();
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   useEffect((): void => {
-    const searchMovie = async (): Promise<void> => {
-      setIsLoading(true);
-      try {
-        const response: IApiResponse = await new Promise<IApiResponse>(
-          (resolve): void => {
-            setTimeout(async (): Promise<void> => {
-              const responseData: IApiResponse = await fetchData(
-                searchInput,
-                pageNumber
-              );
-              resolve(responseData);
-            }, 2000);
-          }
-        );
-        setData(response.Search);
-      } catch (error) {
-        setHasError(true);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    searchMovie().catch((error) => toast(`Error: ${error.message}`));
-  }, [searchInput, pageNumber]);
+    const searchResult = localStorage.getItem('searchResult');
+
+    if (searchResult) {
+      getData(searchResult).catch((error: Error) => console.error(error));
+    }
+  }, [location.search]);
+
+  useEffect((): void => {
+    if (localStorage.getItem('searchResult')) return;
+    getData().catch((error: Error) => console.error(error));
+  }, []);
 
   if (!data || data.length === 0) {
     return <p>Oops! Nothing is found...</p>;
   }
-
-  if (hasError) return <NotFound />;
 
   const content = data.map((item: IData) => (
     <Card item={item} key={item.imdbID} />
@@ -58,22 +52,7 @@ function CardList({ searchInput, pageNumber }: ICardListProps) {
       {content}
       {isLoading && (
         <div className="loader-wrapper">
-          <Oval
-            wrapperClass=""
-            visible
-            ariaLabel="oval-loading"
-            wrapperStyle={{
-              position: 'relative',
-              top: '30%',
-              left: '50%',
-            }}
-            height={60}
-            width={60}
-            color="#08428CD1"
-            secondaryColor="#CCE0FFFF"
-            strokeWidth={2}
-            strokeWidthSecondary={2}
-          />
+          <Loader />
         </div>
       )}
     </div>

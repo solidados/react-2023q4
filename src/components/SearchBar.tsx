@@ -1,11 +1,22 @@
 import { ChangeEvent, useEffect, useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
-export interface ISearchProps {
-  onDataChange: (searchInput: string) => void;
-}
-
-function SearchBar({ onDataChange }: ISearchProps) {
+function SearchBar() {
   const [searchInput, setSearchInput] = useState('');
+  const [searchParams] = useSearchParams();
+
+  const navigate = useNavigate();
+
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    setSearchInput(event.target.value);
+  };
+
+  const handleButtonClick = (e: { preventDefault: () => void }): void => {
+    e.preventDefault();
+    localStorage.setItem('searchResult', searchInput);
+    searchParams.set('search', searchInput);
+    navigate(`?${searchParams.toString()}`);
+  };
 
   useEffect(() => {
     const lastSearchResult = localStorage.getItem('searchResult');
@@ -14,17 +25,8 @@ function SearchBar({ onDataChange }: ISearchProps) {
     }
   }, []);
 
-  const handleInputChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    setSearchInput(event.target.value);
-  };
-
-  const handleButtonClick = (): void => {
-    localStorage.setItem('searchResult', searchInput);
-    onDataChange(searchInput);
-  };
-
   return (
-    <div className="search-bar">
+    <form className="search-bar">
       <input
         type="text"
         id="search"
@@ -33,10 +35,10 @@ function SearchBar({ onDataChange }: ISearchProps) {
         onChange={handleInputChange}
         value={searchInput}
       />
-      <button type="button" className="search-btn" onClick={handleButtonClick}>
+      <button type="submit" className="search-btn" onClick={handleButtonClick}>
         Search
       </button>
-    </div>
+    </form>
   );
 }
 
