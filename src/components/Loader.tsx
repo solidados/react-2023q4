@@ -2,22 +2,39 @@ import { Oval } from 'react-loader-spinner';
 
 function Loader() {
   return (
-    <Oval
-      wrapperClass=""
-      visible
-      ariaLabel="oval-loading"
-      wrapperStyle={{
-        position: 'relative',
-        top: '30%',
-        left: '50%',
+    <div
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
       }}
-      height={60}
-      width={60}
-      color="#08428CD1"
-      secondaryColor="#CCE0FFFF"
-      strokeWidth={2}
-      strokeWidthSecondary={2}
-    />
+    >
+      <div
+        style={{
+          position: 'absolute',
+          top: '30%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+        }}
+      >
+        <Oval
+          visible
+          ariaLabel="oval-loading"
+          height={60}
+          width={60}
+          strokeWidth={2}
+          strokeWidthSecondary={2}
+          color="#08428CD1"
+          secondaryColor="#CCE0FFFF"
+        />
+      </div>
+    </div>
   );
 }
 

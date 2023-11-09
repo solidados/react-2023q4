@@ -1,27 +1,42 @@
 import './pagination.css';
+import { useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
-interface IPaginationProps {
-  currentPage: number;
-  totalPages: number;
-  onPageChange: (newPage: number) => void;
-}
+// interface IPaginationProps {
+//   currentPage: number;
+//   totalPages: number;
+//   onPageChange: (newPage: number) => void;
+// }
 
-function Pagination({
-  currentPage,
-  totalPages,
-  onPageChange,
-}: IPaginationProps) {
-  const handlePageChange = (newPage: number) => {
-    if (newPage >= 1 && newPage <= totalPages) {
-      onPageChange(newPage);
+// {
+//   currentPage,
+//     totalPages,
+//     onPageChange,
+// }: IPaginationProps
+
+function Pagination() {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages] = useState(10);
+
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+
+  const handlePageChange = (pageNumber: number): void => {
+    if (pageNumber >= 1 && pageNumber <= totalPages) {
+      searchParams.set('page', pageNumber.toString());
+      navigate(`?${searchParams.toString()}`);
+      setCurrentPage(pageNumber);
     }
   };
+
+  // useEffect(() => {
+  //   const page = searchParams.get('page');
+  // }, [searchParams]);
+
   return (
     <div className="pagination">
       <div className="pagination-container">
-        <p>
-          Found on <span>{totalPages}</span> pages
-        </p>
+        <p>{/* Found on <span>{totalPages}</span> pages */}</p>
         <div className="pagination-bar">
           <button
             type="button"
@@ -30,13 +45,7 @@ function Pagination({
           >
             prev
           </button>
-          <input
-            type="text"
-            value={currentPage}
-            onChange={(event) =>
-              handlePageChange(parseInt(event.target.value, 10) || 1)
-            }
-          />
+          <input value={currentPage} />
           <button
             type="button"
             onClick={() => handlePageChange(currentPage + 1)}

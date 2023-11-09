@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useSearchParams } from 'react-router-dom';
 import Card from './Card';
 
 import fetchData from '../helpers/api/api';
@@ -11,32 +11,29 @@ import Loader from './Loader';
 function CardList() {
   const [data, setData] = useState<IData[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [searchParams] = useSearchParams();
 
   const location = useLocation();
 
-  const getData = async (value?: string | undefined) => {
+  const getData = (value?: string | undefined, page?: number): void => {
     setIsLoading(true);
-    try {
-      const responseData = await fetchData(value);
-      setData(responseData.Search);
-    } catch (error) {
-      throw new Error();
-    } finally {
-      setIsLoading(false);
-    }
+    fetchData(value, page)
+      .then((responseData) => setData(responseData.Search))
+      .catch((error) => console.error(error.message))
+      .finally(() => setIsLoading(false));
   };
 
   useEffect((): void => {
     const searchResult = localStorage.getItem('searchResult');
-
+    const page = searchParams.get('page') || '1';
     if (searchResult) {
-      getData(searchResult).catch((error: Error) => console.error(error));
+      getData(searchResult, Number(page));
     }
-  }, [location.search]);
+  }, [location.search, searchParams]);
 
   useEffect((): void => {
     if (localStorage.getItem('searchResult')) return;
-    getData().catch((error: Error) => console.error(error));
+    getData();
   }, []);
 
   if (!data || data.length === 0) {

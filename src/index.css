@@ -207,12 +207,3 @@ h2 {
 .home-btn:hover {
   background-color: #afd1f8;
 }
-
-.loader-wrapper {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgb(255, 255, 255, 0.7);
-}
