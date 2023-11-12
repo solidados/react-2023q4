@@ -23,7 +23,12 @@
     "noFallthroughCasesInSwitch": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["vite.config.ts", ".eslintrc.cjs", "src"],
+  "include": [
+    "vite.config.ts",
+    ".eslintrc.cjs",
+    "src",
+    "node_modules/.pnpm/vitest@0.34.6_jsdom@22.1.0_sass@1.69.5/node_modules/vitest/globals.d.ts"
+  ],
   "references": [
     {
       "path": "./tsconfig.node.json"
