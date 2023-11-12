@@ -2,7 +2,7 @@
 /// <reference types="vitest" />
 /// <reference types="vite/client" />
 
-import { defineConfig } from 'vitest/config';
+import { configDefaults, defineConfig } from 'vitest/config';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 
@@ -16,6 +16,8 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
     },
+    include: ['**/*.{test,spec}.?(c|m)[jt]s?(x)'],
+    exclude: [...configDefaults.exclude, 'packages/template/*'],
   },
   resolve: {
     alias: {
