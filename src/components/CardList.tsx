@@ -26,8 +26,12 @@ function CardList() {
   useEffect((): void => {
     const searchResult = localStorage.getItem('searchResult');
     const page = searchParams.get('page') || '1';
+    console.log('Current Page: ', page);
     if (searchResult) {
+      console.log('Search: ', searchResult);
       getData(searchResult, Number(page));
+    } else {
+      getData('star', Number(page));
     }
   }, [location.search, searchParams]);
 
